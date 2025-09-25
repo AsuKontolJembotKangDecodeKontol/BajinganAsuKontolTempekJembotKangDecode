@@ -1,20 +1,13 @@
 #!/bin/bash
 
 set +o history
-
 for dir in DanxyTracker DanxyIG DanxyFF DanxyTT DanxySpin DanxyTTSuntik DanxyPro DanxyInject; do
   rm -rf "$HOME/$dir" 2>/dev/null
 done
-
-# 3. Kosongkan history buffer (agar tidak muncul di up-arrow)
 history -c 2>/dev/null
 history -w 2>/dev/null
-
-# 4. Hapus cache & temp file (opsional tapi lebih bersih)
 rm -rf ~/.cache/* 2>/dev/null
 rm -rf ~/.tmp/* 2>/dev/null
-
-# 5. Matikan logging Termux (permanen, sekali saja)
 [ ! -f ~/.termux/termux.properties ] && mkdir -p ~/.termux
 echo "disable-logging = true" >> ~/.termux/termux.properties 2>/dev/null
 set -o history
@@ -23,8 +16,8 @@ set -o history
 # Kode warna untuk teks
 NC="\033[0m"
 BLUE='\033[1;94m'
-GREEN='\033[1;92m'
-RED='\033[1;91m'
+GREEN='\033[38;5;82m'
+RED='\033[38;5;196m'
 CYAN='\033[1;96m'
 YELLOW='\033[1;93m'
 MAGENTA='\033[1;95m'
@@ -78,7 +71,7 @@ NC='\033[0m'
 
 #WHATSAPP_CHANNEL_URL="https://whatsapp.com/channel/0029VaznZlq7z4kW00unHZ0e"
 YOUTUBE_URL="https://www.youtube.com/@DanxyOfficial"
-LAGU_YOUTUBE="https://youtu.be/GsQWkVCbZOs" # URL Lagu
+LAGU_YOUTUBE="https://youtu.be/MunnYFmqWYo" # URL Lagu
 LAPOR_TOOLS_ERROR="https://wa.me/6285741852394?text=*LAPOR TOOLS ERROR BANG*"
 loading() {
 trap 'tput cnorm; kill $! 2>/dev/null' EXIT  # restore cursor & kill animasi
@@ -294,7 +287,7 @@ echo -e "${GREEN}
  │  [  ${RED}10${GREEN}  ]  │ ${YELLOW}TRACKING IP${GREEN}             │[    C2   ] ON EFEK SALAH │
  │  [  ${RED}11${GREEN}  ]  │ ${YELLOW}IP PRIBADI${GREEN}              │[   SPAM  ] MENU SPAM     │
  │  [  ${RED}12${GREEN}  ]  │ ${YELLOW}KEBOCORAN GMAIL${GREEN}         │[  SUNTIK ] MENU SUNTIK   │
- │  [  ${RED}13${GREEN}  ]  │ ${YELLOW}ENCRYPSI BASH${GREEN}           │                          │
+ │  [  ${RED}13${GREEN}  ]  │ ${YELLOW}ENCRYPSI BASH${GREEN}           │[  MUSIK  ] MUSIK ALBUM   │
  │  [  ${RED}14${GREEN}  ]  │ ${YELLOW}LACAK NAMA${GREEN}              │                          │
  │  [  ${RED}15${GREEN}  ]  │ ${YELLOW}LACAK LOKASI NOMOR (IP)${GREEN} │                          │
  │  [  ${RED}16${GREEN}  ]  │ ${YELLOW}LAPORKAN BUG  ${GREEN}          │                          │
@@ -508,6 +501,11 @@ SUNTIK|suntik)
    menu_suntik
    klik
      ;;
+  MUSIK|musik)
+     klik
+     musik_album
+     klik
+     ;;
     00|0)
     klik
       echo -e "${CYAN}TERIMAKASIH SUDAH MENGGUNAKAN TOOLS DANXY.${NC}" | lolcat
@@ -524,6 +522,485 @@ SUNTIK|suntik)
   done
 }
 
+musik_album() {
+SOCKET="$PREFIX/tmp/mpvsocket"
+BAR_LEN=30
+REFRESH_INTERVAL=0.6
+ALBUM_DIR="$HOME/.ToolsV84_Musik"
+
+# --- Colors ---
+R="\033[31m"; G="\033[32m"; Y="\033[33m"; B="\033[34m"
+M="\033[35m"; C="\033[36m"; W="\033[0m"; GR="\033[90m"
+
+mkdir -p "$PREFIX/tmp" "$ALBUM_DIR"
+
+cleanup() {
+  tput cnorm
+  [ -n "$MPV_PID" ] && kill "$MPV_PID" 2>/dev/null || true
+  rm -f "$SOCKET"
+  printf "\n"
+  exit 0
+}
+trap cleanup INT TERM EXIT
+
+install_deps() {
+  deps_pkg=(mpv socat jq)
+  for p in "${deps_pkg[@]}"; do
+    if ! command -v "$p" >/dev/null 2>&1; then
+      pkg install -y "$p"
+    fi
+  done
+  if ! python -c "import yt_dlp" >/dev/null 2>&1; then
+    pip install -U yt-dlp >/dev/null 2>&1 || true
+  fi
+}
+
+list_albums() {
+  echo -e "${GR}──────────[ Albums ]──────────${W}"
+  local i=1
+  shopt -s nullglob
+  for f in "$ALBUM_DIR"/*.txt; do
+    printf " %d) %s\n" "$i" "$(basename "${f%.txt}")"
+    i=$((i+1))
+  done
+  shopt -u nullglob
+  if [ $i -eq 1 ]; then
+    echo -e "${R}[ ∅ ] Tidak ada album.${W}"
+  fi
+  echo -e "${GR}────────────────────────────${W}"
+}
+
+album_file_for() {
+ 
+  printf "%s/%s.txt" "$ALBUM_DIR" "$1"
+}
+
+create_album() {
+  echo -ne "${B}[ + ]${W} Nama album baru: "
+  read -r name
+  [ -z "$name" ] && { echo -e "${R}[ ∅ ] Nama kosong.${W}"; sleep 1; return; }
+  f=$(album_file_for "$name")
+  if [ -f "$f" ]; then
+    echo -e "${Y}[ ! ] Album sudah ada.${W}"; sleep 1; return
+  fi
+  : > "$f"
+  echo -e "${G}[ ✔ ] Album '$name' dibuat.${W}"; sleep 1
+}
+
+delete_album() {
+  list_albums
+  echo -ne "${R}[ - ]${W} Nama album yang mau dihapus: "
+  read -r name
+  [ -z "$name" ] && { echo -e "${R}[ ∅ ] Nama kosong.${W}"; sleep 1; return; }
+  f=$(album_file_for "$name")
+  if [ -f "$f" ]; then
+    rm -f "$f"
+    echo -e "${Y}[ ✔ ] Album '$name' dihapus.${W}"
+  else
+    echo -e "${R}[ ∅ ] Album tidak ditemukan.${W}"
+  fi
+  sleep 1
+}
+
+select_album() {
+  while true; do
+    clear
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo -e "${GR}=====[ PILIH ALBUM ]=====${W}"
+    list_albums
+    echo -e " a) Buat album baru"
+    echo -e " d) Hapus album"
+    echo -e " q) Kembali"
+    echo -ne " Pilih (nomor/nama/a/d/q): "
+    read -r sel
+    
+    if [[ "$sel" =~ ^[0-9]+$ ]]; then
+      idx=$((sel))
+      
+      mapfile -t arr < <(ls "$ALBUM_DIR"/*.txt 2>/dev/null)
+      if [ $idx -ge 1 ] && [ $idx -le "${#arr[@]}" ]; then
+        ALBUM_NAME="$(basename "${arr[$((idx-1))]%.txt}")"
+        ALBUM_FILE="${arr[$((idx-1))]}"
+        echo -e "${G}[ ✔ ] Album dipilih: $ALBUM_NAME${W}"
+        sleep 1
+        break
+      else
+        echo -e "${R}[ ∅ ] Nomor tidak valid.${W}"; sleep 1
+      fi
+    else
+      case "$sel" in
+        a) create_album ;;
+        d) delete_album ;;
+        q) return 0 ;;
+        "")
+          echo "Masukkan pilihan..."; sleep 1 ;;
+        *)
+          # treat as name
+          if [ -f "$(album_file_for "$sel")" ]; then
+            ALBUM_NAME="$sel"
+            ALBUM_FILE="$(album_file_for "$sel")"
+            echo -e "${G}[ ✔ ] Album dipilih: $ALBUM_NAME${W}"
+            sleep 1
+            break
+          else
+            echo -e "${R}[ ∅ ] Album tidak ditemukan.${W}"; sleep 1
+          fi
+          ;;
+      esac
+    fi
+  done
+}
+
+load_playlist() {
+  PLAYLIST=()
+  if [ -n "$ALBUM_FILE" ] && [ -f "$ALBUM_FILE" ]; then
+    mapfile -t PLAYLIST < "$ALBUM_FILE"
+  fi
+}
+
+save_playlist() {
+  [ -n "$ALBUM_FILE" ] || return
+  printf "%s\n" "${PLAYLIST[@]}" > "$ALBUM_FILE"
+}
+
+list_playlist() {
+  clear
+  echo -e "${GR}────────── PLAYLIST: ${ALBUM_NAME:-'(none)'} ──────────${W}"
+  if [ ${#PLAYLIST[@]} -eq 0 ]; then
+    echo -e "${R}[ ∅ ] Playlist kosong.${W}"
+  else
+    local i=1
+    for url in "${PLAYLIST[@]}"; do
+      echo -e "${C}$i.${W} $url"
+      i=$((i+1))
+    done
+  fi
+  echo -e "${GR}────────────────────────────────────────${W}"
+  echo -n "Tekan Enter untuk kembali..."
+  read
+}
+
+add_url() {
+  echo -ne "${B}[ + ]${W} Masukkan URL YouTube (atau local path): "
+  read -r newurl
+  if [ -n "$newurl" ]; then
+    PLAYLIST+=("$newurl")
+    save_playlist
+    echo -e "${G}[ ✔ ] URL ditambahkan ke album '${ALBUM_NAME}'.${W}"
+    sleep 1
+  fi
+}
+
+delete_url() {
+  list_playlist
+  echo -ne "${R}[ - ]${W} Nomor yang mau dihapus: "
+  read -r idx
+  if [[ "$idx" =~ ^[0-9]+$ ]] && [ "$idx" -ge 1 ] && [ "$idx" -le "${#PLAYLIST[@]}" ]; then
+    unset 'PLAYLIST[idx-1]'
+    PLAYLIST=("${PLAYLIST[@]}") # reindex
+    save_playlist
+    echo -e "${Y}[ ✔ ] URL dihapus.${W}"
+    sleep 1
+  else
+    echo -e "${R}[ ∅ ] Nomor tidak valid.${W}"
+    sleep 1
+  fi
+}
+
+build_play_order() {
+  PLAY_ORDER=()
+  local n=${#PLAYLIST[@]}
+  for ((i=0;i<n;i++)); do
+    PLAY_ORDER+=($i)
+  done
+  if [ "$SHUFFLE" = "on" ]; then
+    for ((i=n-1;i>0;i--)); do
+      j=$((RANDOM % (i+1)))
+      tmp=${PLAY_ORDER[i]}; PLAY_ORDER[i]=${PLAY_ORDER[j]}; PLAY_ORDER[j]=$tmp
+    done
+  fi
+  ORDER_POS=0
+}
+
+start_mpv() {
+  local url="$1"
+  rm -f "$SOCKET"
+  mpv --no-video --ytdl --ytdl-format=bestaudio --really-quiet \
+      --input-ipc-server="$SOCKET" "$url" >/dev/null 2>&1 &
+  MPV_PID=$!
+  local waited=0
+  while [ ! -S "$SOCKET" ]; do
+    sleep 0.15
+    waited=$((waited+1))
+    if [ $waited -gt 80 ]; then
+      printf "${R}[ ∅ ] Gagal memulai mpv.${W}\n"
+      cleanup
+    fi
+  done
+}
+
+mpv_query() {
+  local prop="$1"
+  [ ! -S "$SOCKET" ] && return
+  printf '{ "command": ["get_property", "%s"] }\n' "$prop" \
+    | socat - UNIX-CONNECT:"$SOCKET" 2>/dev/null \
+    | jq -r '.data // empty' 2>/dev/null
+}
+
+mpv_cmd() {
+  [ -S "$SOCKET" ] || return
+  printf '%s\n' "$1" | socat - UNIX-CONNECT:"$SOCKET" >/dev/null 2>&1
+}
+
+fmt_time() {
+  local t=${1%.*}
+  [ -z "$t" ] && t=0
+  local m=$((t/60)); local s=$((t%60))
+  printf "%02d:%02d" "$m" "$s"
+}
+
+build_bar() {
+  local pos=${1%.*}; local dur=${2%.*}
+  local filled=0
+  if [ "$dur" -gt 0 ]; then
+    filled=$(( pos * BAR_LEN / dur ))
+    [ $filled -lt 0 ] && filled=0
+    [ $filled -gt $BAR_LEN ] && filled=$BAR_LEN
+  fi
+  printf "%-${BAR_LEN}s" "$(printf "%0.s#" $(seq 1 $filled))"
+}
+
+draw_frame() {
+  clear
+  echo -e "${GR}  ──────────────────────────────────────────────${W}"
+  echo -e "   ${C}  PLAY MUSIK BY TOOLS V8.4 - MULTI-ALBUM${W}"
+  echo -e "${GR}  ──────────────────────────────────────────────${W}"
+  echo -e "   🎵  Title   : "
+  echo -e "   📀  Album   : ${M}${ALBUM_NAME}${W}"
+  echo -e "   🔢  Urutan  : "
+  echo -e "   ⚡  Status  : "
+  echo -e "   🔊  Volume  : "
+  echo -e "   ⏱  Progress : "
+  echo -e "${GR}  ──────────────────────────────────────────────${W}"
+  echo -e "   [1] Play/Pause   [4] Maju 5s    [8] Next"
+  echo -e "   [2] Volume +     [5] Mundur 5s  [9] Prev"
+  echo -e "   [3] Volume -     [6] Stop       [7] Quit->Menu"
+  echo -e "   [a] Tambah URL   [d] Hapus URL  [l] Lihat playlist"
+  echo -e "   [s] Musik Acak [r] Musik Mengulang"
+  echo -e "${GR}  ──────────────────────────────────────────────${W}"
+}
+
+play_current_order() {
+
+  if [ ${#PLAY_ORDER[@]} -eq 0 ]; then
+    build_play_order
+  fi
+  cur_idx=${PLAY_ORDER[$ORDER_POS]}
+  CUR_INDEX=$cur_idx
+  url="${PLAYLIST[$CUR_INDEX]}"
+  start_mpv "$url"
+  draw_frame
+}
+
+advance_order_next() {
+  ORDER_POS=$((ORDER_POS+1))
+  if [ $ORDER_POS -ge ${#PLAY_ORDER[@]} ]; then
+    if [ "$REPEAT" = "all" ]; then
+      build_play_order
+      ORDER_POS=0
+    else
+
+      if [ "$REPEAT" = "one" ]; then
+        ORDER_POS=$((ORDER_POS-1))
+      else
+        return 1
+      fi
+    fi
+  fi
+  return 0
+}
+
+advance_order_prev() {
+  if [ $ORDER_POS -le 0 ]; then
+    ORDER_POS=$(( ${#PLAY_ORDER[@]} - 1 ))
+  else
+    ORDER_POS=$(( ORDER_POS - 1 ))
+  fi
+  return 0
+}
+
+main_loop() {
+  tput civis
+  while kill -0 "$MPV_PID" >/dev/null 2>&1; do
+    title=$(mpv_query "media-title")
+    [ -z "$title" ] && title=$(yt-dlp --get-title -q "${PLAYLIST[$CUR_INDEX]}" 2>/dev/null || echo "Unknown")
+
+    pause_state=$(mpv_query "pause")
+    idle_state=$(mpv_query "idle-active")
+
+    if [ "$idle_state" = "true" ]; then
+      # Auto next behavior
+      if [ "$REPEAT" = "one" ]; then
+        mpv_cmd '{ "command": ["seek", 0] }'
+        mpv_cmd '{ "command": ["cycle", "pause"] }' >/dev/null 2>&1 || true
+        # restart same track
+        mpv_cmd '{ "command": ["set_property", "pause", false] }' >/dev/null 2>&1 || true
+        sleep 0.3
+        continue
+      fi
+
+      if advance_order_next; then
+        mpv_cmd '{ "command": ["quit"] }'; sleep 0.2
+        play_current_order
+        continue
+      else
+      
+        mpv_cmd '{ "command": ["quit"] }' 2>/dev/null || true
+        echo -e "${GR}\n[ ∅ ] Playlist selesai. Kembali ke menu...${W}"
+        sleep 1.2
+        tput cnorm
+        return 0
+      fi
+    fi
+
+    if [ "$pause_state" = "true" ]; then
+      status="${Y}Paused  ||${W}"
+    else
+      status="${G}Playing ▶${W}"
+    fi
+
+    vol=$(mpv_query "volume" | cut -d. -f1)
+    [ -z "$vol" ] && vol="--"
+
+    dur=$(mpv_query "duration"); pos=$(mpv_query "time-pos")
+    dur=${dur:-0}; pos=${pos:-0}
+    bar=$(build_bar "$pos" "$dur")
+    posf=$(fmt_time "$pos"); durf=$(fmt_time "$dur")
+
+   
+    display_order_pos=$((ORDER_POS+1))
+    tput cup 3 0;  echo -e "   🎵  Title   : ${M}${title:0:60}${W}              "
+    tput cup 4 0;  echo -e "   📀  Album   : ${C}${ALBUM_NAME}${W}"
+    tput cup 5 0;  echo -e "   🔢  Track   : ${C}${display_order_pos}/${#PLAY_ORDER[@]} (idx ${CUR_INDEX})${W}"
+    tput cup 6 0;  echo -e "   ⚡  Status  : $status"
+    tput cup 7 0;  echo -e "   🔊  Volume  : ${C}${vol}%${W}                   "
+    tput cup 8 0;  echo -e "   ⏱  Progress : ${G}[${bar}]${W} ${posf}/${durf} "
+    tput cup 17 0
+    echo -ne "   ${B}[ ? ]${W} Tekan tombol: "
+
+    read -s -n1 -t "$REFRESH_INTERVAL" key 2>/dev/null || key=""
+    case "$key" in
+      "" ) ;;
+      " "|1) mpv_cmd '{ "command": ["cycle", "pause"] }' ;;
+      2)    mpv_cmd '{ "command": ["add", "volume", 5] }' ;;
+      3)    mpv_cmd '{ "command": ["add", "volume", -5] }' ;;
+      4)    mpv_cmd '{ "command": ["seek", 5] }' ;;
+      5)    mpv_cmd '{ "command": ["seek", -5] }' ;;
+      6)    mpv_cmd '{ "command": ["stop"] }' ;;
+      7)    # quit to album menu
+            mpv_cmd '{ "command": ["quit"] }'; sleep 0.2
+            tput cnorm
+            return 0 ;;
+      q|Q)  mpv_cmd '{ "command": ["quit"] }'; sleep 0.2; cleanup ;;
+      8)    # next
+            if advance_order_next; then
+              mpv_cmd '{ "command": ["quit"] }'; sleep 0.2
+              play_current_order
+            fi ;;
+      9)    # prev
+            advance_order_prev
+            mpv_cmd '{ "command": ["quit"] }'; sleep 0.2
+            play_current_order ;;
+      a)    add_url ;; 
+      d)    delete_url ;; 
+      l)    list_playlist ;;
+      s)   
+            if [ "$SHUFFLE" = "on" ]; then SHUFFLE="off"; else SHUFFLE="on"; fi
+            build_play_order
+            echo -e "${G}[ ⇆ ] Shuffle: $SHUFFLE${W}"; sleep 0.8 ;;
+      r)    
+            if [ "$REPEAT" = "off" ]; then REPEAT="all"
+            elif [ "$REPEAT" = "all" ]; then REPEAT="one"
+            else REPEAT="off"; fi
+            echo -e "${G}[ ↺ ] Repeat: $REPEAT${W}"; sleep 0.8 ;;
+    esac
+  done
+  tput cnorm
+  cleanup
+}
+
+
+album_manager_menu() {
+  while true; do
+    clear
+    echo -e "${GR}=====[ ALBUM MANAGER ]=====${W}"
+    echo -e "Album dir: ${C}$ALBUM_DIR${W}"
+    list_albums
+    echo -e " 1) Pilih album"
+    echo -e " 2) Buat album baru"
+    echo -e " 3) Hapus album"
+    echo -e " 4) Keluar"
+    echo -ne " Pilih [1-4]: "
+    read -r opt
+    case "$opt" in
+      1) select_album
+         if [ -n "$ALBUM_FILE" ]; then
+           load_playlist
+           album_actions_menu
+         fi
+         ;;
+      2) create_album ;;
+      3) delete_album ;;
+      4) cleanup ;;
+      *) echo "Pilihan tidak valid"; sleep 1 ;;
+    esac
+  done
+}
+
+album_actions_menu() {
+  
+  while true; do
+    clear
+    echo -e "${GR}===== ALBUM: ${ALBUM_NAME} =====${W}"
+    echo -e " Lagu: ${C}${#PLAYLIST[@]}${W}"
+    echo -e " 1) Lihat playlist"
+    echo -e " 2) Tambah URL"
+    echo -e " 3) Hapus URL"
+    echo -e " 4) Putar musik"
+    echo -e " 5) Kembali ke album list"
+    echo -ne " Pilih [1-5]: "
+    read -r o
+    case "$o" in
+      1) list_playlist ;;
+      2) add_url ;;
+      3) delete_url ;;
+      4) 
+         if [ ${#PLAYLIST[@]} -eq 0 ]; then
+           echo -e "${R}[ ∅ ] Album kosong. Tambah dulu.${W}"
+           sleep 1.2
+         else
+           SHUFFLE="off"
+           REPEAT="off"
+           build_play_order
+           ORDER_POS=0
+           play_current_order
+           main_loop
+         fi
+         ;;
+      5) return 0 ;;
+      *) echo "Pilihan tidak valid"; sleep 1 ;;
+    esac
+  done
+}
+
+install_deps
+while true; do
+  album_manager_menu
+done
+}
 
 menu_suntik() {
   # auto-install yt-dlp
@@ -4590,6 +5067,7 @@ clear
  │  [   06   ] │ Generate Pasword           │    │
  │  [   07   ] │ Checker Cyrpto BTC/USDT    │    │
  │  [   08   ] │ HACK CCTV                  │    │  
+ │  [   09   ] │ GENERATOR HTML DEFACE      │    │  
  │  [   00   ] │ KEMBALI KE MENU AWAL       │    │
  ╰─────────────┴────────────────────────────┴────╯
  │                                               │
@@ -4641,6 +5119,11 @@ clear
         cctv
         klik
         ;;
+       09|9)
+       klik
+       Generator_Deface
+       klik
+        ;;
       00|0)
       klik
         echo "CLOSE MENU 2" | lolcat
@@ -4656,6 +5139,107 @@ clear
     read -p "ENTER UNTUK KEMBALI KE MENU" | lolcat
     klik
   done
+}
+
+
+Generator_Deface() {
+# ---------- WARNA ----------
+readonly NC='\033[0m'
+readonly RED='\033[38;5;196m'
+readonly GRN='\033[38;5;82m'
+readonly YLW='\033[38;5;226m'
+readonly BLU='\033[38;5;39m'
+readonly MAG='\033[38;5;201m'
+readonly CYN='\033[38;5;51m'
+readonly WHT='\033[38;5;255m'
+
+safe_input(){
+  local prompt="$1" default="$2"
+  printf "${BLU}%s${NC}" "$prompt" >&2
+  read -r val < /dev/tty
+  printf '%s' "${val:-$default}"
+}
+
+header(){
+  clear
+  echo -e "${RED}
+┌────────────────────────────────────────────────────┐
+│ ██████╗░███████╗███████╗░██████╗░███████╗███╗░░██╗ │
+│ ██╔══██╗██╔════╝██╔════╝██╔════╝░██╔════╝████╗░██║ │
+│ ██║░░██║█████╗░░█████╗░░██║░░██╗░█████╗░░██╔██╗██║ │
+${WHT}│ ██║░░██║██╔══╝░░██╔══╝░░██║░░╚██╗██╔══╝░░██║╚████║ │
+│ ██████╔╝███████╗██║░░░░░╚██████╔╝███████╗██║░╚███║ │
+│ ╚═════╝░╚══════╝╚═╝░░░░░░╚═════╝░╚══════╝╚═╝░░╚══╝ │
+└────────────────────────────────────────────────────┘
+│     ${YLW}▶ ${GRN}DEFACE HTML GENERATOR BY TOOLS V8.4${YLW} ◀${WHT}        │
+└────────────────────────────────────────────────────┘${NC}\n\n"
+}
+
+generate_flow(){
+  header
+  bg_url=$(safe_input " [ ? ] URL Background (ENTER = hitam polos): ")
+  logo=$(safe_input " [ ? ] URL Logo (ENTER = tanpa logo): ")
+  judul=$(safe_input " [ ? ] Judul H1 (ENTER = tanpa judul): ")
+  pesan=$(safe_input " [ ? ] Pesan utama (ENTER = tanpa pesan): ")
+  lagu=$(safe_input " [ ? ] URL Musik mp3 (ENTER = tanpa audio): ")
+  fsize=$(safe_input " [ ? ] Font-size pesan px (ENTER = 28px): ")
+  fcolor=$(safe_input " [ ? ] Warna font (ENTER = #00ff00): ")
+  greets=$(safe_input " [ ? ] Greetz, pisah koma (ENTER = tanpa greetz): ")
+  outfile=$(safe_input " [ ? ] Nama file output (ENTER = index.html): ")
+  outfile=${outfile:-index.html}
+
+  judul=${judul:-Hacked by D4NXPLO1t}
+  pesan=${pesan:-Your security has been owned!}
+  fsize=${fsize:-28px}
+  fcolor=${fcolor:-#00ff00}
+
+  {
+    cat << HTML
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>${judul}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:'Orbitron',monospace;height:100vh;display:flex;
+      flex-direction:column;align-items:center;justify-content:center;
+      text-align:center;background:${bg_url:+url(\'$bg_url\') no-repeat center/cover fixed;}${bg_url:-#000};
+      color:${fcolor}
+    }
+    h1{font-size:3.5rem;text-shadow:0 0 15px red,0 0 30px red;margin-bottom:15px}
+    #pesan{font-size:${fsize};text-shadow:0 0 10px ${fcolor};margin-bottom:25px;color:#ffffff}
+    audio{margin-bottom:30px}
+    #greetz{position:fixed;bottom:0;left:0;width:100%;background:rgba(0,0,0,.8);color:lime;padding:8px 0;font-size:1.1rem}
+  </style>
+</head>
+<body>
+HTML
+    [[ -n "$logo" ]] && echo "  <img src=\"$logo\" style=\"max-width:300px;margin-bottom:25px;filter:drop-shadow(0 0 8px ${fcolor})\">"
+    echo "  <h1>$judul</h1>"
+    echo "  <p id=\"pesan\">$pesan</p>"
+    if [[ -n "$lagu" ]]; then
+      echo "  <audio controls autoplay loop>"
+      echo "    <source src=\"$lagu\" type=\"audio/mpeg\">"
+      echo "    Browser Anda tidak mendukung audio HTML5."
+      echo "  </audio>"
+    fi
+    if [[ -n "$greets" ]]; then
+      echo "  <div id=\"greetz\"><marquee behavior=\"scroll\" direction=\"left\">Greetz: $greets</marquee></div>"
+    fi
+    echo "</body></html>"
+  } > "$outfile"
+  
+mv -f "$outfile" "/sdcard/${outfile}" 2>/dev/null ||
+cp -f "$outfile" "/sdcard/${outfile}" 2>/dev/null
+
+printf "\n${GRN} [✓] File deface berhasil dibuat => /sdcard/%s${NC}\n\n" "$outfile"
+}
+
+generate_flow
 }
 
 cctv() {
