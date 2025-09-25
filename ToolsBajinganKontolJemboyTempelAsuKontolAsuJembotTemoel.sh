@@ -503,7 +503,9 @@ SUNTIK|suntik)
      ;;
   MUSIK|musik)
      klik
+     stop_music
      musik_album
+     kembali_ke_menu
      klik
      ;;
     00|0)
@@ -5122,6 +5124,7 @@ clear
        09|9)
        klik
        Generator_Deface
+       kembali_ke_menu
        klik
         ;;
       00|0)
