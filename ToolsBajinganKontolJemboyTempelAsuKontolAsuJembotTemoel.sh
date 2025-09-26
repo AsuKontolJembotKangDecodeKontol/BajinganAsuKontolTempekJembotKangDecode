@@ -506,6 +506,7 @@ SUNTIK|suntik)
      stop_music
      musik_album
      kembali_ke_menu
+     play_music
      klik
      ;;
     00|0)
@@ -944,20 +945,21 @@ album_manager_menu() {
     echo -e " 1) Pilih album"
     echo -e " 2) Buat album baru"
     echo -e " 3) Hapus album"
-    echo -e " 4) Keluar"
-    echo -ne " Pilih [1-4]: "
+    echo -e " 4) Keluar Dari Musik Album"
+    echo -ne " Pilih [0-4]: "
     read -r opt
     case "$opt" in
-      1) select_album
+      1) 
+         select_album
          if [ -n "$ALBUM_FILE" ]; then
            load_playlist
-           album_actions_menu
+           album_actions_menu   # masuk ke menu aksi album
          fi
          ;;
       2) create_album ;;
       3) delete_album ;;
-      4) cleanup ;;
-      *) echo "Pilihan tidak valid"; sleep 1 ;;
+      4) return ;;   # balik ke menu utama / keluar dari loop
+      *) echo -e "${R}PILIHAN TIDAK VALID${W}"; sleep 1 ;;
     esac
   done
 }
@@ -999,9 +1001,7 @@ album_actions_menu() {
 }
 
 install_deps
-while true; do
-  album_manager_menu
-done
+album_manager_menu
 }
 
 menu_suntik() {
@@ -5124,7 +5124,6 @@ clear
        09|9)
        klik
        Generator_Deface
-       kembali_ke_menu
        klik
         ;;
       00|0)
